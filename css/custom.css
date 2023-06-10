@@ -1,20 +1,24 @@
 .navbar{
-    height: 80px;
-    background-color: black;
-    
+    background-color: #24292f;
+    margin-bottom: 30px;
+
    
+
+}
+#nav_search{
+    width: 300px;
 }
 
+.nav-item{
+    margin-right: 30px;
+    content: "";
+    height: 100%;
+    left: 50%;
+    min-height: 48px;
+    top: 50%;
+  
+}
 .navbar-brand{
-    margin-right: 70px;
-    margin-left: -20px;
-
+    margin-right: 50px;
 }
 
-.navbar-brand,.nav-item > a{
-    color: white;
-}
-
-.nav-item > a {
-    margin-right: 40px;
-}
