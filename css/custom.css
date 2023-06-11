@@ -22,3 +22,117 @@
     margin-right: 50px;
 }
 
+ 
+/*sidebar left*/
+.profile-image-container {
+    padding: 20px;
+    border: 0.1px rgba(255, 231, 231, 0.199);
+    border-style: groove ;
+    justify-content: center;
+    display: flex;
+}
+
+.profile-name{
+    justify-content: center;
+    display: flex;
+    font-size: 40px;
+    font-weight: bolder;
+    color: rgba(0, 0, 0, 0.616);
+
+}
+.profile-sm{
+    justify-content: center;
+    display: flex;
+    margin-top: -12px;
+    margin-bottom: 20px;
+}
+.profile-image{
+    width: 220px;
+    border-radius: 50%;
+}
+
+/**github contribution table css*/
+#contributions {
+    border-collapse: collapse;
+    width: 740px; /* Adjust the width as needed */
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+  }
+  
+  #contributions th {
+    padding: 8px;
+    background-color: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    text-align: center;
+  }
+  
+  #contributions td {
+    padding: 8px;
+    border: 1px solid #e1e4e8;
+    text-align: center;
+    background-color: #ebedf0;
+  }
+  
+  #contributions td[data-level="1"] {
+    background-color: #c6e48b;
+  }
+  
+  #contributions td[data-level="2"] {
+    background-color: #7bc96f;
+  }
+  
+  #contributions td[data-level="3"] {
+    background-color: #239a3b;
+  }
+  
+  #contributions td[data-level="4"] {
+    background-color: #196127;
+  }
+  
+  #contributions td[data-level="0"] {
+    background-color: #ebedf0;
+  }
+  
+  #contributions td:hover {
+    background-color: #0366d6;
+    color: white;
+  }
+  
+  #contributions td.is-legend {
+    background-color: transparent;
+    border: none;
+    text-align: left;
+  }
+  
+  #contributions .legend-text {
+    font-size: 11px;
+    color: #586069;
+    padding-left: 5px;
+  }
+  
+  #contributions .legend-block {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+  }
+  
+  #contributions .legend-block[data-level="1"] {
+    background-color: #c6e48b;
+  }
+  
+  #contributions .legend-block[data-level="2"] {
+    background-color: #7bc96f;
+  }
+  
+  #contributions .legend-block[data-level="3"] {
+    background-color: #239a3b;
+  }
+  
+  #contributions .legend-block[data-level="4"] {
+    background-color: #196127;
+  }
+  
+  #contributions .legend-block[data-level="0"] {
+    background-color: #ebedf0;
+  }
