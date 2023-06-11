@@ -34,4 +34,20 @@ fetch(`https://api.github.com/users/${username}/repos?sort=updated&direction=des
   })
   .catch(error => {
     console.error('Error fetching pinned repositories:', error);
-  });
+  });;
+
+
+  /**search script */
+
+  function performSearch(event) {
+    event.preventDefault(); // Prevent form submission
+
+    const searchInput = document.getElementById('searchInput');
+    const searchTerm = searchInput.value.trim(); // Get the search term and remove leading/trailing spaces
+
+    if (searchTerm !== '') {
+      // Perform search operation
+      alert('Performing search for: ' + searchTerm);
+      // You can customize the search logic here based on your requirements
+    }
+  };;
