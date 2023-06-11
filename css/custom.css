@@ -106,6 +106,29 @@
   
 
 }
+/*Github chart*/
+.github-chart {
+  
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .github-chart {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .github-chart {
+    max-width: 100%;
+  }
+}
+
+
+
+
 style="font-weight: 600; margin-top: 20px; margin-bottom: 15px;"
 .repo-card:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.37);
