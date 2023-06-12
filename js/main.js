@@ -210,22 +210,31 @@ const commitsPerPage = 5;
 let currentPage = 1;
 let commitsData = [];
 
-fetch(`https://api.github.com/users/${username}/events`)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Failed to fetch commits');
-    }
-    return response.json();
-  })
-  .then(data => {
-    commitsData = data.filter(event => event.type === 'PushEvent');
-    displayCommits(commitsData);
-    displayPagination(commitsData.length);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    commitsContainer.textContent = 'Failed to fetch commits';
-  });
+// Function to fetch the latest commits
+function fetchLatestCommits() {
+  fetch(`https://api.github.com/users/${username}/events`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch commits');
+      }
+      return response.json();
+    })
+    .then(data => {
+      commitsData = data.filter(event => event.type === 'PushEvent');
+      displayCommits(commitsData);
+      displayPagination(commitsData.length);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      commitsContainer.textContent = 'Failed to fetch commits';
+    });
+}
+
+// Call fetchLatestCommits initially
+fetchLatestCommits();
+
+// Periodically fetch the latest commits every 1 minute (adjust as needed)
+setInterval(fetchLatestCommits, 60000);
 
 function displayCommits(commits) {
   commitsContainer.innerHTML = '';
@@ -300,6 +309,18 @@ function updatePaginationButtons() {
 
 /***scrip for stars and badge */
 
+const sqlite3 = require('sqlite3').verbose();
+
+// Create/connect to the SQLite database
+const db = new sqlite3.Database('star-count.db');
+
+// Create the star count table if it doesn't exist
+db.run(`
+  CREATE TABLE IF NOT EXISTS star_count (
+    count INTEGER
+  )
+`);
+
 const starLink = document.getElementById('starLink');
 const starBadge = document.getElementById('starBadge');
 let isStarred = false;
@@ -316,15 +337,35 @@ function incrementStarCount() {
   const newCount = currentCount + 1;
   starBadge.textContent = newCount;
 
-  // Store the updated star count in localStorage
-  localStorage.setItem('starCount', newCount);
+  // Update the star count in the SQLite database
+  db.run(`
+    INSERT INTO star_count (count)
+    VALUES (?)
+  `, [newCount], function (error) {
+    if (error) {
+      console.error('Failed to update star count in the database:', error);
+    } else {
+      console.log('Star count updated successfully.');
+    }
+  });
 }
 
-// Retrieve the star count from localStorage on page load
+// Retrieve the initial star count from the SQLite database on page load
 document.addEventListener('DOMContentLoaded', () => {
-  const storedCount = localStorage.getItem('starCount');
-  if (storedCount) {
-    starBadge.textContent = storedCount;
-    isStarred = true;
-  }
+  db.get(`
+    SELECT count
+    FROM star_count
+  `, (error, row) => {
+    if (error) {
+      console.error('Failed to retrieve star count from the database:', error);
+    } else if (row) {
+      starBadge.textContent = row.count;
+      isStarred = true;
+    }
+  });
 });
+
+
+
+/**lol db for a mere stars counter */
+
