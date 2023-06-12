@@ -307,65 +307,64 @@ function updatePaginationButtons() {
   buttons[buttons.length - 1].disabled = currentPage === buttons.length;
 }
 
-/***scrip for stars and badge */
-
-const sqlite3 = require('sqlite3').verbose();
-
-// Create/connect to the SQLite database
-const db = new sqlite3.Database('star-count.db');
-
-// Create the star count table if it doesn't exist
-db.run(`
-  CREATE TABLE IF NOT EXISTS star_count (
-    count INTEGER
-  )
-`);
-
+/***stars counter */
+// JavaScript
 const starLink = document.getElementById('starLink');
 const starBadge = document.getElementById('starBadge');
+const notificationPopup = document.getElementById('notificationPopup');
 let isStarred = false;
+
+// Retrieve the initial star count from the server
+fetchStarCount();
 
 starLink.addEventListener('click', () => {
   if (!isStarred) {
     incrementStarCount();
+    showNotificationPopup();
     isStarred = true;
+    starLink.classList.add('starred');
   }
 });
 
 function incrementStarCount() {
-  const currentCount = parseInt(starBadge.textContent);
-  const newCount = currentCount + 1;
-  starBadge.textContent = newCount;
-
-  // Update the star count in the SQLite database
-  db.run(`
-    INSERT INTO star_count (count)
-    VALUES (?)
-  `, [newCount], function (error) {
-    if (error) {
-      console.error('Failed to update star count in the database:', error);
-    } else {
-      console.log('Star count updated successfully.');
-    }
-  });
+  // Increment the star count on the server
+  fetch('increment.php')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to increment star count');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Update the star count on the client
+      starBadge.textContent = data.count;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }
 
-// Retrieve the initial star count from the SQLite database on page load
-document.addEventListener('DOMContentLoaded', () => {
-  db.get(`
-    SELECT count
-    FROM star_count
-  `, (error, row) => {
-    if (error) {
-      console.error('Failed to retrieve star count from the database:', error);
-    } else if (row) {
-      starBadge.textContent = row.count;
-      isStarred = true;
-    }
-  });
-});
+function fetchStarCount() {
+  // Retrieve the star count from the server
+  fetch('getCount.php')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to retrieve star count');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Update the star count on the client
+      starBadge.textContent = data.count;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
 
-
-
-/**lol db for a mere stars counter */
-
+function showNotificationPopup() {
+  notificationPopup.style.display = 'block';
+  setTimeout(() => {
+    notificationPopup.style.display = 'none';
+  }, 2000);
+}

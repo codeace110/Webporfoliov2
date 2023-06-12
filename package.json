@@ -15,6 +15,7 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
+    "express": "^4.18.2",
     "github-calendar": "^2.3.2",
     "sqlite": "^4.2.1",
     "sqlite3": "^5.1.6"
