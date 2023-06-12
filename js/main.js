@@ -39,15 +39,30 @@ fetch(`https://api.github.com/users/${username}/repos?sort=updated&direction=des
 
   /**search script */
 
-  function performSearch(event) {
-    event.preventDefault(); // Prevent form submission
+  // function performSearch(event) {
+  //   event.preventDefault(); // Prevent form submission
 
-    const searchInput = document.getElementById('searchInput');
-    const searchTerm = searchInput.value.trim(); // Get the search term and remove leading/trailing spaces
+  //   const searchInput = document.getElementById('searchInput');
+  //   const searchTerm = searchInput.value.trim(); // Get the search term and remove leading/trailing spaces
 
-    if (searchTerm !== '') {
-      // Perform search operation
-      alert('Performing search for: ' + searchTerm);
-      // You can customize the search logic here based on your requirements
-    }
-  };;
+  //   if (searchTerm !== '') {
+  //     // Perform search operation
+  //     alert('Performing search for: ' + searchTerm);
+  //     // You can customize the search logic here based on your requirements
+  //   }
+  // };;
+
+  /**repo badge script */
+
+  fetch(`https://api.github.com/users/${username}/repos?sort=updated&direction=desc`)
+  .then(response => response.json())
+  .then(data => {
+    // Get the total number of repositories
+    const repoCount = data.length;
+
+    // Update the badge with the repository count
+    document.getElementById('repo-count').textContent = repoCount;
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
