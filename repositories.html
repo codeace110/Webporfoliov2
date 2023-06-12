@@ -11,8 +11,6 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
 
-
-
     <link
       rel="stylesheet"
       href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -63,23 +61,39 @@
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="#"
-                  ><i class="fi fi-tr-circle-bookmark"> Repositories <span id="repo-count" class="badge text-bg-secondary">4</span></i></a
+                  ><i class="fi fi-tr-circle-bookmark">
+                    Repositories
+                    <span id="repo-count" class="badge text-bg-secondary"
+                      >4</span
+                    ></i
+                  ></a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"
-                  ><i class="fi fi-tr-square-star"></i> Stars</a
-                >
+                <a class="nav-link" href="#" id="starLink">
+                    <i id="starBadge" class="badge">0</i> Stars
+                </a>
+                <div class="notification-popup">
+                    Thank you for giving stars
+                </div>
               </li>
+              <div id="notificationPopup" class="notification-popup">
+                Thank you for giving a star!
+              </div>
               <div id="nav_search" class="nav-item">
                 <form class="d-flex" role="search">
                   <input
+                    id="search-input"
                     class="form-control me-2"
                     type="search"
                     placeholder="Find repositories"
                     aria-label="Search"
                   />
-                  <button class="btn btn-outline-light" type="submit">
+                  <button
+                    id="search-button"
+                    class="btn btn-outline-light"
+                    type="submit"
+                  >
                     Search
                   </button>
                 </form>
@@ -98,99 +112,45 @@
                 <img class="profile-image" src="img/marjo.png" alt="" />
               </div>
             </div>
-            <div class="row-md">
-              <div class="profile-name">
-                <h2>Jomar Neri</h2>
-              </div>
-              <div class="profile-name">
-                <h4>KODEGO BATCH WD29</h4>
-              </div>
-              <div class="profile-sm">
-                <small>Web development bootcamp</small>
-              </div>
-              <div
-                class="row-md border-top color-border-muted pt-3 mt-3 d-none d-md-block"
-              ></div>
-              <div class="profile-name" style="justify-content: left">
-                <h6>
-                  Full Stack Web Development
-                  <small style="color: rgba(35, 35, 82, 0.863)"
-                    >SN. KG-10092022-001#</small
-                  >
-                </h6>
-              </div>
-              <div class="profile-name" style="justify-content: left">
-                <h6>Email: jomarneri16@gmail.com</h6>
-              </div>
-              <div class="profile-name" style="justify-content: left">
-                <h6>Phone:+63 9923343394</h6>
-              </div>
-            </div>
+
             <div
               class="row-md border-top color-border-muted pt-3 mt-3 d-none d-md-block"
             ></div>
-
-            <div class="row-md">
-              <div class="profile-name" style="justify-content: left">
-                <h6>
-                  <i class="fa-brands fa-linkedin" style=""></i>
-                  <a href="https://www.linkedin.com/in/jomar-neri-05ba71137/"
-                    ><sup>
-                      https://www.linkedin.com/in/jomar-neri-05ba71137/</sup
-                    ></a
-                  >
-                </h6>
-              </div>
-              <div class="profile-name" style="justify-content: left">
-                <h6>
-                  <i class="fa-brands fa-facebook"></i>
-                  <a href="https://www.linkedin.com/in/jomar-neri-05ba71137/"
-                    ><sup>https://web.facebook.com/codeace110</sup></a
-                  >
-                </h6>
-              </div>
-              <div class="profile-name" style="justify-content: left">
-                <h6>
-                  <i class="fa-brands fa-github"></i>
-                  <a href="https://github.com/codeace110"
-                    ><sup>https://github.com/codeace110</sup></a
-                  >
-                </h6>
-              </div>
-              <div class="skills-container">
-                <h3>Skills :</h3>
-                <ul class="skills-list">
-                  <li>HTML , CSS , JavaScript, PHP, MYSQL</li> 
-                  <li>Bootstrap, Sass, Laravel PHP , React JS</li> 
-                  <li>Firebase, API Integration, XAMPP, LAMP STACK, LINUX</li>
-                </ul>
-              </div>
+            <h6>Commits and update</h6>
+            <div class="pagination-container" id="pagination">
+              <!-- Pagination buttons will be dynamically added here -->
             </div>
+            <div class="commits-container" id="commits">
+              <!-- Commits will be dynamically added here -->
+            </div>
+
+            <div
+              class="row-md border-top color-border-muted pt-3 mt-3 d-none d-md-block"
+            ></div>
           </div>
           <div class="col-lg-8 right-side-main">
             <div class="col-md-6">
               <div><h5>Contribution real-time Github record</h5></div>
               <img
-              src="https://ghchart.rshah.org/codeace110"
-              alt="2022'marjo's Github chart"
-              class="github-chart"
-            />
+                src="https://ghchart.rshah.org/codeace110"
+                alt="2022'marjo's Github chart"
+                class="github-chart"
+              />
             </div>
             <div
               class="row-md border-top color-border-muted pt-2 mt-3 d-none d-md-block"
             ></div>
-            <h6 class="m-4" >
-             Repositories
-            </h6>
+            <h6 class="m-4">Repositories</h6>
             <div id="repositories" class="col-xl-6">
-                <!---Repositories-->
-
+              <!---Repositories-->
             </div>
           </div>
         </div>
       </div>
     </main>
-    <div class="row-md border-top color-border-muted pt-2 mt-3 d-none d-md-block"></div>
+    <div
+      class="row-md border-top color-border-muted pt-2 mt-3 d-none d-md-block"
+    ></div>
     <footer>
       <footer>
         <div class="footer-container">
@@ -209,9 +169,10 @@
           </div>
         </div>
       </footer>
-      
     </footer>
-    <div class="row-md border-top color-border-muted pt-2 mt-3 d-none d-md-block"></div>
+    <div
+      class="row-md border-top color-border-muted pt-2 mt-3 d-none d-md-block"
+    ></div>
 
     <!-- onload script-->
     <script src="js/vendor/modernizr-3.11.2.min.js"></script>
@@ -250,10 +211,9 @@
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      $(window).on('load', function() {
-        $('#loading-container').fadeOut('slow'); 
+      $(window).on("load", function () {
+        $("#loading-container").fadeOut("slow");
       });
     </script>
-
   </body>
 </html>

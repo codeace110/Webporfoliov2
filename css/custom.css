@@ -130,10 +130,6 @@
   }
 }
 
-
-
-
-style="font-weight: 600; margin-top: 20px; margin-bottom: 15px;"
 .repo-card:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.37);
 }
@@ -247,4 +243,89 @@ footer {
 .repository-card p {
   margin-bottom: 8px;
   color: #586069;
+}
+.language {
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+/*commits and update*/
+.commits-container{
+  border: 1px solid rgba(0, 0, 0, 0.185);
+  padding: 10px;
+  margin-bottom: 3px;
+  margin-top: 5px;
+}
+
+.commit-card {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 5px;
+
+  
+}
+
+.commit-card h4 {
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  
+}
+
+.commit-card p {
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+.commit-card span {
+  font-size: 10px;
+  color: #777777;
+}
+
+.pagination-button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+}
+
+.pagination-button.active {
+  background-color: #0056b3;
+}
+
+.pagination-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/***Badge and stars css**/
+
+.badge {
+  background-color: #ffcc00;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 50%;
+}
+
+.notification-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
 }
