@@ -220,3 +220,31 @@ footer {
 #loading-container img {
   width: 100px;
 }
+
+/*repositories page style */
+
+/*repositories page style */
+#repositories {
+  max-height: 600px;
+  width: auto;
+  overflow-y: auto;
+}
+
+.repository-card {
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.repository-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.repository-card p {
+  margin-bottom: 8px;
+  color: #586069;
+}
