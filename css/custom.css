@@ -5,9 +5,8 @@
    
 
 }
-#nav_search{
-    width: 300px;
-}
+
+
 
 .nav-item{
     margin-right: 30px;
@@ -16,10 +15,15 @@
     left: 50%;
     min-height: 48px;
     top: 50%;
+
+
   
 }
+
+
 .navbar-brand{
-    margin-right: 50px;
+    margin-right: 300px;
+    color: rgba(255, 255, 255, 0.575);
 }
 
  
