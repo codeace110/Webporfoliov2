@@ -330,3 +330,51 @@ footer {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.column-centered{
+  padding: 50px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+/*style for wesite page*/
+
+#website-body{
+  background-color: #24292f;
+  color: rgba(255, 255, 255, 0.877);
+
+}
+
+.landing{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+
+}
+
+.landing > h1 {
+  font-weight: bolder;
+  font-style: oblique;
+  font-size: 36px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.landing > h5 {
+  font-weight: bolder;
+  font-style: oblique;
+  font-size: 26px;
+  width: 700px;
+  margin-bottom: 80px;
+  color: rgba(255, 255, 255, 0.637);
+
+}
+
+#website-search{
+  width: 500px;
+}
