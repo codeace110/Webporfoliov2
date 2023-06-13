@@ -18,15 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
   var database = firebase.database();
   var starCountRef = database.ref('starCount');
 
-  // Check if the visitor has already given a star
-  var hasGivenStar = localStorage.getItem('hasGivenStar');
-  if (hasGivenStar) {
-    disableStarLink();
-  }
-
   // Add event listener to the star link
   var starLink = document.getElementById('starLink');
-  starLink.addEventListener('click', function() {
+  starLink.addEventListener('click', handleClick);
+
+  function handleClick() {
+    // Check if the visitor has already given a star
+    var hasGivenStar = localStorage.getItem('hasGivenStar');
     if (hasGivenStar) {
       return; // Exit early if the visitor has already given a star
     }
@@ -53,20 +51,25 @@ document.addEventListener("DOMContentLoaded", function () {
         notificationPopup.style.display = 'block';
 
         // Disable the star link to prevent further clicks
-        disableStarLink();
+        starLink.removeEventListener('click', handleClick);
+        starLink.classList.add('disabled');
+        starLink.disabled = true;
 
         // Set the flag in local storage indicating that the visitor has given a star
         localStorage.setItem('hasGivenStar', true);
 
         // Fade out the notification popup after 5 seconds
         setTimeout(function() {
-          notificationPopup.style.display = 'none';
+          notificationPopup.style.opacity = '0';
+          setTimeout(function() {
+            notificationPopup.style.display = 'none';
+          }, 1000); // Wait for fade out transition to complete
         }, 5000);
       })
       .catch(function(error) {
         console.log('Error storing star count:', error);
       });
-  });
+  }
 
   // Retrieve the star count from Firebase Realtime Database on page load
   starCountRef.once('value')
@@ -74,13 +77,20 @@ document.addEventListener("DOMContentLoaded", function () {
       var starCount = snapshot.val();
       var starBadge = document.getElementById('starBadge');
       starBadge.innerText = starCount;
+
+      // Check if the visitor has already given a star
+      var hasGivenStar = localStorage.getItem('hasGivenStar');
+      if (hasGivenStar) {
+        disableStarLink();
+      }
     })
     .catch(function(error) {
       console.log('Error retrieving star count:', error);
     });
 
   function disableStarLink() {
-    starLink.removeEventListener('click', handleClick);
+    starLink.removeEventListener('click', handleClick); // Remove the event listener
     starLink.classList.add('disabled');
+    starLink.disabled = true;
   }
 });
