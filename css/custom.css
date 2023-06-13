@@ -20,9 +20,11 @@
   
 }
 
-
+#starLink{
+  margin-right:100px;
+}
 .navbar-brand{
-    margin-right: 300px;
+    margin-right: 100px;
     color: rgba(255, 255, 255, 0.575);
 }
 
