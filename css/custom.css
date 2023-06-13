@@ -528,7 +528,7 @@ footer {
   width: 45%;
   border-radius: 10px;
   height: 110%;
-  box-shadow: 30px 30px 30px 20px rgba(99, 108, 235, 0.116) ;
+  box-shadow: 50px 50px 50px 50px rgba(99, 108, 235, 0.116) ;
 
 }
 
@@ -556,7 +556,7 @@ footer {
   align-items: center;
   text-align: center;
   justify-content: center;
-  background-color: #8f3deed8;
+  background-color: #903dee71;
   font-weight: 700;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   padding: 50px;
@@ -564,16 +564,62 @@ footer {
   box-shadow: 30px 30px 30px 40px rgba(89, 0, 107, 0.534) ;
   margin-top: 90px;
   margin-bottom: 90px;
+
 }
 
 .banner-h1 {
   font-size: 70px;
   width: 100%;
   line-height: 6rem;
+  color: rgba(255, 255, 255, 0.993);
 }
 
 
 .banner-h4 {
   font-size: 40px;
   line-height: 3.6rem;
+  color: rgba(255, 255, 255, 0.685);
+}
+
+.myself{
+  background-color: white;
+  margin-bottom: 50px;
+  color: black;
+  padding: 25px;
+
+}
+
+
+.image-wrapper {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+
+.my-image{
+  border-radius: 50%;
+  width: 250px;
+  height: auto;
+}
+.team-heading{
+font-weight: bold;
+font-size: 35px;
+color: #000000c9;
+ 
+}
+
+.my-description{
+  padding: 15px;
+  display: flex;
+  text-align: center;
+}
+
+.my-description > h5 {
+  line-height: 2rem;
+  font-weight: 900;
+  font-size: 27px;
+  margin: 10px;
+  font-style: italic;
+  color: #00000080;
+
 }
