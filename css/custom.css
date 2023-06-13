@@ -363,6 +363,10 @@ footer {
   font-style: oblique;
   font-size: 36px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  background-color: transparent;
+
+  
 }
 
 .landing > h5 {
@@ -372,9 +376,55 @@ footer {
   width: 700px;
   margin-bottom: 80px;
   color: rgba(255, 255, 255, 0.637);
+  background-color: transparent;
+ 
+
+
 
 }
 
 #website-search{
   width: 500px;
 }
+
+.column.centered {
+  text-align: center;
+}
+
+.column.centered {
+  text-align: center;
+}
+
+.inline-elements .btn {
+  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-top: 12px;
+  border-radius: 12px;
+  font-size: 18px;
+  padding: 10px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.inline-elements .btn.current-menu-item {
+  background-color: #2b87e9fa;
+  color: #fff;
+}
+
+.inline-elements .btn:hover {
+  background-color: #022d5c;
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#selection-btn-container {
+  background-color: #c6e1ffaf;
+  border-radius: 30px;
+  padding: 10px;
+  box-shadow: 0 0 300px rgba(71, 112, 248, 0.952);
+}
+/**website main style?*/
+
