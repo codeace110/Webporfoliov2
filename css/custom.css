@@ -601,12 +601,11 @@ footer {
   width: 250px;
   height: auto;
 }
-.team-heading{
-font-weight: bold;
-font-size: 35px;
-color: #000000c9;
- 
-}
+.team-heading {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: rgba(0, 0, 0, 0.79);
+  }
 
 .my-description{
   padding: 15px;
