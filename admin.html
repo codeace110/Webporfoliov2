@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <title>ADMIN</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="og:title" content="admin" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="apple-touch-icon" href="marjo.ico" />
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <meta name="theme-color" content="#fafafa" />
+  </head>
+
+  <body>
+    <!-- onload script-->
+    <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+    <script src="js/plugins.js"></script>
+
+    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <script>
+      window.ga = function () {
+        ga.q.push(arguments);
+      };
+      ga.q = [];
+      ga.l = +new Date();
+      ga("create", "UA-XXXXX-Y", "auto");
+      ga("set", "anonymizeIp", true);
+      ga("set", "transport", "beacon");
+      ga("send", "pageview");
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-------popper JS-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://kit.fontawesome.com/4ed105ab1f.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyAH0l7OBPQXGoEBLHRdrqXGshWHeACXvdE",
+          authDomain: "webporfolio2.firebaseapp.com",
+          projectId: "webporfolio2",
+          storageBucket: "webporfolio2.appspot.com",
+          messagingSenderId: "305672493039",
+          appId: "1:305672493039:web:f4c244c785c0692f26c81a",
+          measurementId: "G-S8RX0TRGZ7",
+          databaseURL:
+            "https://webporfolio2-default-rtdb.asia-southeast1.firebasedatabase.app",
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the storage service and database service
+        var storage = firebase.storage();
+        var database = firebase.database();
+
+        // Handle form submission
+        $("form").submit(function (e) {
+          e.preventDefault();
+
+          var leftImageFile = $("#left-image")[0].files[0];
+          var centerImageFile = $("#center-image")[0].files[0];
+          var rightImageFile = $("#right-image")[0].files[0];
+          var title = $("#title").val();
+          var status = $("#status").val();
+          var category = $("#category").val();
+
+          // Helper function to upload an image and get the download URL
+          function uploadImageAndGetURL(file) {
+            return new Promise(function (resolve, reject) {
+              var storageRef = storage.ref();
+              var imageRef = storageRef.child(file.name);
+              var uploadTask = imageRef.put(file);
+
+              uploadTask.on(
+                "state_changed",
+                function (snapshot) {
+                  // Track upload progress
+                  var progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  console.log("Upload is " + progress + "% done");
+                  // Show upload progress to the user
+                  // You can update a progress bar or display a message
+                },
+                function (error) {
+                  // Handle upload error
+                  console.error("Upload error:", error);
+                  reject(error);
+                },
+                function () {
+                  // Upload completed successfully
+                  // Get the download URL of the uploaded image
+                  uploadTask.snapshot.ref
+                    .getDownloadURL()
+                    .then(function (downloadURL) {
+                      resolve(downloadURL);
+                    });
+                }
+              );
+            });
+          }
+
+          // Upload the images
+          Promise.all([
+            uploadImageAndGetURL(leftImageFile),
+            uploadImageAndGetURL(centerImageFile),
+            uploadImageAndGetURL(rightImageFile),
+          ])
+            .then(function ([leftImageURL, centerImageURL, rightImageURL]) {
+              // Save the card data to the Firebase Realtime Database
+              var cardData = {
+                category: category,
+                title: title,
+                status: status,
+                leftImage: leftImageURL,
+                centerImage: centerImageURL,
+                rightImage: rightImageURL,
+                clicks: 0, // Initial click count
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+              };
+
+              
+            //   var newCardKey = database.ref().push().key;
+              var updates = {};
+              updates[category + "/" + title] = cardData;
+
+              database.ref().update(updates, function (error) {
+                if (error) {
+                  console.error("Error saving card data:", error);
+                } else {
+                  console.log("Card data saved successfully");
+                  // Reset the form after successful submission
+                  $("form")[0].reset();
+                }
+              });
+            })
+            .catch(function (error) {
+              console.error("Error uploading images:", error);
+            });
+        });
+      });
+    </script>
+
+    <div class="container">
+      <h1>Admin Panel</h1>
+      <form id="upload-form">
+        <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select class="form-control" id="category" name="category" required>
+            <option value="">Select a category</option>
+            <option value="ecommerce">Ecommerce</option>
+            <option value="tech">Tech</option>
+            <option value="events">Events</option>
+            <option value="health">Health</option>
+            <option value="lifestyle">Lifestyle</option>
+            <option value="community">Community</option>
+            <option value="business">Business</option>
+            <option value="design">Design</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="status" class="form-label">Status</label>
+          <input
+            type="text"
+            class="form-control"
+            id="status"
+            name="status"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="left-image" class="form-label">Left Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="left-image"
+            name="left-image"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="center-image" class="form-label">Center Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="center-image"
+            name="center-image"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="right-image" class="form-label">Right Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="right-image"
+            name="right-image"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
