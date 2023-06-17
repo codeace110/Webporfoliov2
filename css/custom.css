@@ -395,7 +395,7 @@ footer {
   text-align: center;
 }
 
-.inline-elements .btn {
+.category-button {
   margin-right: 10px;
   margin-bottom: 20px;
   margin-top: 12px;
@@ -409,18 +409,30 @@ footer {
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
-.inline-elements .btn.current-menu-item {
-  background-color: #2b87e9fa;
+.category-button {
+  background-color: #f1f1f1;
+  color: #333;
+
+  border: none;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-button:hover {
+  background-color: #7192ff;
+  color: white;
+}
+/* Custom CSS for the active button */
+.category-button.active {
+  background-color: #007bff;
   color: #fff;
 }
 
-.inline-elements .btn:hover {
-  background-color: #022d5c;
-  color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
 
-#selection-btn-container {
+
+
+#navigation-container {
   background-color: #c6e1ffaf;
   border-radius: 30px;
   padding: 10px;
@@ -432,6 +444,8 @@ footer {
   margin: 30px;
  
 }
+
+btn btn-primary chip inline-button menu-item
 
 .card-body {
   margin-top: 50px;

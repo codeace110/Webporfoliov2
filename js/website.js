@@ -1,3 +1,5 @@
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyAH0l7OBPQXGoEBLHRdrqXGshWHeACXvdE",
   authDomain: "webporfolio2.firebaseapp.com",
@@ -16,12 +18,9 @@ firebase.initializeApp(firebaseConfig);
 // Get a reference to the database
 const database = firebase.database();
 
-
 // Function to generate a card element
-function createCard(title, leftImage, centerImage, rightImage) {
+function createCard(title, status, leftImage, centerImage, rightImage) {
   const cardContainer = document.getElementById("mycard-container");
-  cardContainer.classList.add("col-lg-4", "col-md-6", "mb-4");
-
   const card = document.createElement("div");
   card.classList.add("card", "website-cards");
 
@@ -65,6 +64,18 @@ function createCard(title, leftImage, centerImage, rightImage) {
   cardContainer.appendChild(card);
 }
 
+// Function to clear card container
+function clearCards() {
+  const cardContainer = document.getElementById("mycard-container");
+  cardContainer.innerHTML = "";
+}
+
+// Function to filter cards based on category
+function filterCards(category) {
+  clearCards();
+  fetchCards(category);
+}
+
 // Function to fetch and display cards from Firebase Realtime Database
 function fetchCards(category) {
   const cardsRef = database.ref(category);
@@ -73,12 +84,27 @@ function fetchCards(category) {
     const cards = snapshot.val();
     for (let card in cards) {
       const { title, status, leftImage, centerImage, rightImage } = cards[card];
-      createCard(title, leftImage, centerImage, rightImage);
+      createCard(title, status, leftImage, centerImage, rightImage);
     }
   });
 }
 
-// Fetch cards for a specific category
+// Fetch cards for the initial "All" category
 fetchCards("ecommerce");
-fetchCards("events");
-fetchCards("tech");
+// Function to filter cards based on category
+function filterCards(categoryButton) {
+  // Remove "active" class from all category buttons
+  const categoryButtons = document.getElementsByClassName("category-button");
+  for (let i = 0; i < categoryButtons.length; i++) {
+    const button = categoryButtons[i];
+    button.classList.remove("active");
+  }
+
+  // Add "active" class to the selected category button
+  categoryButton.classList.add("active");
+
+  // Clear cards and fetch cards based on the selected category
+  clearCards();
+  const category = categoryButton.textContent.toLowerCase();
+  fetchCards(category);
+}
