@@ -9,68 +9,76 @@ const firebaseConfig = {
   databaseURL:
     "https://webporfolio2-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Get a reference to the storage service and database service
-var storage = firebase.storage();
-var database = firebase.database();
+// Get a reference to the database
+const database = firebase.database();
 
-// Reference to the "cards" collection in your Firebase Realtime Database
-var cardsRef = firebase.database().ref('cards');
 
-// Fetch the data
-cardsRef.once('value')
-.then(function(snapshot) {
-  // Process the snapshot and populate the cards
-  var cardsData = snapshot.val();
-  populateCards(cardsData, 'All');
-})
-.catch(function(error) {
-  console.log('Error fetching data:', error);
-});
+// Function to generate a card element
+function createCard(title, leftImage, centerImage, rightImage) {
+  const cardContainer = document.getElementById("mycard-container");
+  cardContainer.classList.add("col-lg-4", "col-md-6", "mb-4");
 
-function populateCards(cardsData, category) {
-var cardContainer = document.querySelector('.row');
-cardContainer.innerHTML = ''; // Clear existing cards
+  const card = document.createElement("div");
+  card.classList.add("card", "website-cards");
 
-// Filter the card data based on the selected category
-var filteredCards = Object.values(cardsData).filter(function(card) {
-  return card.category === category || category === 'All';
-});
+  const imgWrapper = document.createElement("div");
+  imgWrapper.classList.add("card-img-wrapper");
+  card.appendChild(imgWrapper);
 
-// Iterate over the filtered card data
-filteredCards.forEach(function(card) {
-  // Create the card HTML elements
-  var cardHtml = `
-    <div class="col-lg-4 col-md-6 mb-4">
-      <div class="card website-cards">
-        <div class="card-img-wrapper">
-          <img src="${card.leftImageUrl}" class="card-img-left" alt="Left Image" />
-          <img src="${card.centerImageUrl}" class="card-img-center" alt="Center Image" />
-          <img src="${card.rightImageUrl}" class="card-img-right" alt="Right Image" />
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">${card.title}</h5>
-        </div>
-      </div>
-    </div>
-  `;
+  const leftImg = document.createElement("img");
+  leftImg.src = leftImage;
+  leftImg.classList.add("card-img-left");
+  leftImg.alt = "Left Image";
+  imgWrapper.appendChild(leftImg);
 
-  // Append the card to the container
-  cardContainer.innerHTML += cardHtml;
-});
+  const centerImg = document.createElement("img");
+  centerImg.src = centerImage;
+  centerImg.classList.add("card-img-center");
+  centerImg.alt = "Center Image";
+  imgWrapper.appendChild(centerImg);
+
+  const rightImg = document.createElement("img");
+  rightImg.src = rightImage;
+  rightImg.classList.add("card-img-right");
+  rightImg.alt = "Right Image";
+  imgWrapper.appendChild(rightImg);
+
+  const cardBody = document.createElement("div");
+  cardBody.classList.add("card-body");
+
+  const cardTitle = document.createElement("h5");
+  cardTitle.classList.add("card-title");
+  cardTitle.textContent = title;
+  cardBody.appendChild(cardTitle);
+
+  const cardStatus = document.createElement("p");
+  cardStatus.classList.add("card-text");
+  cardStatus.textContent = status;
+  cardBody.appendChild(cardStatus);
+
+  card.appendChild(cardBody);
+
+  cardContainer.appendChild(card);
 }
 
-// Handle category selection
-$(".chip").click(function() {
-var selectedCategory = $(this).text();
-cardsRef.once('value')
-  .then(function(snapshot) {
-    var cardsData = snapshot.val();
-    populateCards(cardsData, selectedCategory);
-  })
-  .catch(function(error) {
-    console.log('Error fetching data:', error);
+// Function to fetch and display cards from Firebase Realtime Database
+function fetchCards(category) {
+  const cardsRef = database.ref(category);
+
+  cardsRef.on("value", (snapshot) => {
+    const cards = snapshot.val();
+    for (let card in cards) {
+      const { title, status, leftImage, centerImage, rightImage } = cards[card];
+      createCard(title, leftImage, centerImage, rightImage);
+    }
   });
-});
+}
+
+// Fetch cards for a specific category
+fetchCards("ecommerce");
+fetchCards("events");
+fetchCards("tech");

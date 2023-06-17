@@ -10,7 +10,7 @@
     <meta property="og:type" content="" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
-    <script src="js/website.js"></script>
+    
 
     <link
       rel="stylesheet"
@@ -24,6 +24,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/github-calendar/dist/github-calendar.css"
     />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="js/website.js"></script>
+
 
     <link rel="manifest" href="site.webmanifest" />
     <link rel="apple-touch-icon" href="marjo.ico" />
@@ -145,260 +150,9 @@
 
     <!----MAIN---->
     <main class="container">
-      <div class="row">
+      <div id="mycard-container" class="row">
         <!-- Card 1 -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card website-cards">
-            <div class="card-img-wrapper">
-              <img
-                src="img/marjo.png"
-                class="card-img-left"
-                id="card-img-left"
-                alt="Left Image"
-              />
-              <img
-                src="img/marjoss.png"
-                class="card-img-center"
-                id="card-img-center"
-                alt="Center Image"
-              />
-              <img
-                src="img/marjo.png"
-                class="card-img-right"
-                id="card-img-right"
-                alt="Right Image"
-              />
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Card 1</h5>
-            </div>
-          </div>
-        </div>
-        <!-- Repeat the above card structure for cards 2 to 9 -->
-        <!-- Card 2 -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card website-cards">
-            <div class="card-img-wrapper">
-              <img
-                src="img/marjo.png"
-                class="card-img-left"
-                id="card-img-left"
-                alt="Left Image"
-              />
-              <img
-                src="img/marjoss.png"
-                class="card-img-center"
-                id="card-img-center"
-                alt="Center Image"
-              />
-              <img
-                src="img/marjo.png"
-                class="card-img-right"
-                id="card-img-right"
-                alt="Right Image"
-              />
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Card 1</h5>
-            </div>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card website-cards">
-            <div class="card-img-wrapper">
-              <img
-                src="img/marjo.png"
-                class="card-img-left"
-                id="card-img-left"
-                alt="Left Image"
-              />
-              <img
-                src="img/marjoss.png"
-                class="card-img-center"
-                id="card-img-center"
-                alt="Center Image"
-              />
-              <img
-                src="img/marjo.png"
-                class="card-img-right"
-                id="card-img-right"
-                alt="Right Image"
-              />
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Card 1</h5>
-            </div>
-          </div>
-        </div>
-        <!-- Card 4 -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card website-cards">
-            <div class="card-img-wrapper">
-              <img
-                src="img/marjo.png"
-                class="card-img-left"
-                id="card-img-left"
-                alt="Left Image"
-              />
-              <img
-                src="img/marjoss.png"
-                class="card-img-center"
-                id="card-img-center"
-                alt="Center Image"
-              />
-              <img
-                src="img/marjo.png"
-                class="card-img-right"
-                id="card-img-right"
-                alt="Right Image"
-              />
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Card 1</h5>
-            </div>
-          </div>
-        </div>
-        <!-- Card 5 -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card website-cards">
-            <div class="card-img-wrapper">
-              <img
-                src="img/marjo.png"
-                class="card-img-left"
-                id="card-img-left"
-                alt="Left Image"
-              />
-              <img
-                src="img/marjoss.png"
-                class="card-img-center"
-                id="card-img-center"
-                alt="Center Image"
-              />
-              <img
-                src="img/marjo.png"
-                class="card-img-right"
-                id="card-img-right"
-                alt="Right Image"
-              />
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Card 1</h5>
-            </div>
-          </div>
-        </div>
-        <!-- Card 6 -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card website-cards">
-            <div class="card-img-wrapper">
-              <img
-                src="img/marjo.png"
-                class="card-img-left"
-                id="card-img-left"
-                alt="Left Image"
-              />
-              <img
-                src="img/marjoss.png"
-                class="card-img-center"
-                id="card-img-center"
-                alt="Center Image"
-              />
-              <img
-                src="img/marjo.png"
-                class="card-img-right"
-                id="card-img-right"
-                alt="Right Image"
-              />
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Card 1</h5>
-            </div>
-          </div>
-        </div>
-        <!-- Card 7 -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card website-cards">
-            <div class="card-img-wrapper">
-              <img
-                src="img/marjo.png"
-                class="card-img-left"
-                id="card-img-left"
-                alt="Left Image"
-              />
-              <img
-                src="img/marjoss.png"
-                class="card-img-center"
-                id="card-img-center"
-                alt="Center Image"
-              />
-              <img
-                src="img/marjo.png"
-                class="card-img-right"
-                id="card-img-right"
-                alt="Right Image"
-              />
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Card 1</h5>
-            </div>
-          </div>
-        </div>
-        <!-- Card 8 -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card website-cards">
-            <div class="card-img-wrapper">
-              <img
-                src="img/marjo.png"
-                class="card-img-left"
-                id="card-img-left"
-                alt="Left Image"
-              />
-              <img
-                src="img/marjoss.png"
-                class="card-img-center"
-                id="card-img-center"
-                alt="Center Image"
-              />
-              <img
-                src="img/marjo.png"
-                class="card-img-right"
-                id="card-img-right"
-                alt="Right Image"
-              />
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Card 1</h5>
-            </div>
-          </div>
-        </div>
-        <!-- Card 9 -->
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card website-cards">
-            <div class="card-img-wrapper">
-              <img
-                src="img/marjo.png"
-                class="card-img-left"
-                id="card-img-left"
-                alt="Left Image"
-              />
-              <img
-                src="img/marjoss.png"
-                class="card-img-center"
-                id="card-img-center"
-                alt="Center Image"
-              />
-              <img
-                src="img/marjo.png"
-                class="card-img-right"
-                id="card-img-right"
-                alt="Right Image"
-              />
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Card 1</h5>
-            </div>
-          </div>
-        </div>
+       
       </div>
     </main>
     <nav aria-label="Page navigation">
