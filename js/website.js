@@ -18,11 +18,11 @@ firebase.initializeApp(firebaseConfig);
 // Get a reference to the database
 const database = firebase.database();
 
-// Function to generate a card element
 function createCard(title, status, leftImage, centerImage, rightImage) {
   const cardContainer = document.getElementById("mycard-container");
+
   const card = document.createElement("div");
-  card.classList.add("card", "website-cards");
+  card.classList.add("card", "col-lg-4", "col-md-6", "mb-4");
 
   const imgWrapper = document.createElement("div");
   imgWrapper.classList.add("card-img-wrapper");
@@ -63,7 +63,6 @@ function createCard(title, status, leftImage, centerImage, rightImage) {
 
   cardContainer.appendChild(card);
 }
-
 // Function to clear card container
 function clearCards() {
   const cardContainer = document.getElementById("mycard-container");
@@ -89,6 +88,9 @@ function fetchCards(category) {
   });
 }
 
+
+
+
 // Fetch cards for the initial "All" category
 fetchCards("ecommerce");
 // Function to filter cards based on category
@@ -108,3 +110,5 @@ function filterCards(categoryButton) {
   const category = categoryButton.textContent.toLowerCase();
   fetchCards(category);
 }
+
+
