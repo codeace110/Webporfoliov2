@@ -1,5 +1,3 @@
-
-
 const firebaseConfig = {
   apiKey: "AIzaSyAH0l7OBPQXGoEBLHRdrqXGshWHeACXvdE",
   authDomain: "webporfolio2.firebaseapp.com",
@@ -63,6 +61,7 @@ function createCard(title, status, leftImage, centerImage, rightImage) {
 
   cardContainer.appendChild(card);
 }
+
 // Function to clear card container
 function clearCards() {
   const cardContainer = document.getElementById("mycard-container");
@@ -88,11 +87,9 @@ function fetchCards(category) {
   });
 }
 
-
-
-
 // Fetch cards for the initial "All" category
-fetchCards("ecommerce");
+fetchCards("all");
+
 // Function to filter cards based on category
 function filterCards(categoryButton) {
   // Remove "active" class from all category buttons
@@ -111,4 +108,78 @@ function filterCards(categoryButton) {
   fetchCards(category);
 }
 
+let currentPage = 1;
+const cardsPerPage = 6;
+
+function renderPaginationButtons(totalCards, category) {
+  const paginationContainer = document.getElementById("pagination-container");
+  if (!paginationContainer) {
+    return; // Exit function if pagination container is not found
+  }
+  paginationContainer.innerHTML = "";
+
+  const totalPages = Math.ceil(totalCards / cardsPerPage);
+  for (let i = 0; i <= totalPages; i++) {
+    const pageItem = document.createElement("li");
+    pageItem.classList.add("page-item");
+
+    const pageLink = document.createElement("a");
+    pageLink.classList.add("page-link");
+    pageLink.href = "#";
+    pageLink.textContent = i;
+    pageLink.addEventListener("click", () => {
+      currentPage = i;
+      fetchCards(category);
+    });
+
+    if (i === currentPage) {
+      pageItem.classList.add("active");
+    }
+
+    pageItem.appendChild(pageLink);
+    paginationContainer.appendChild(pageItem);
+  }
+}
+
+
+function fetchCards(category) {
+  const cardsRef = database.ref(category);
+
+  cardsRef.on("value", (snapshot) => {
+    const cards = snapshot.val();
+    const totalCards = Object.keys(cards).length;
+    const startIndex = (currentPage - 1) * cardsPerPage;
+    const endIndex = startIndex + cardsPerPage;
+
+    const cardsToShow = Object.values(cards).slice(startIndex, endIndex);
+
+    clearCards();
+    for (let card of cardsToShow) {
+      const { title, status, leftImage, centerImage, rightImage } = card;
+      createCard(title, status, leftImage, centerImage, rightImage);
+    }
+
+    // Render pagination buttons
+    renderPaginationButtons(totalCards, category);
+  });
+}
+
+const paginationContainer = document.getElementById("pagination-container");
+const prevButton = paginationContainer.querySelector(".fa-angles-left");
+const nextButton = paginationContainer.querySelector(".fa-angles-right");
+
+prevButton.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    fetchCards(getActiveCategory());
+  }
+});
+
+nextButton.addEventListener("click", () => {
+  const totalPages = Math.ceil(totalCards / cardsPerPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    fetchCards(getActiveCategory());
+  }
+});
 

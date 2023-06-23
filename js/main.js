@@ -59,6 +59,12 @@ fetch(`https://api.github.com/users/${username}/repos?sort=updated&direction=des
  |                          |
  | repo badge script        |
  */
+
+ function showAlert() {
+  alert("This project is private.");
+}
+
+
   fetch(`https://api.github.com/users/${username}/repos?sort=updated&direction=desc`)
   .then(response => response.json())
   .then(data => {
