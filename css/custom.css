@@ -808,7 +808,7 @@ footer {
   text-align: center;
   justify-content: center;
 }
-.ichiraku-main {
+.ichiraku-main,.med-main {
   margin-top: 50px;
   width: 500px;
   height: 700px;
@@ -822,7 +822,9 @@ footer {
 .ichiraku .ichiraku-main {
   filter: drop-shadow(0px 0px  80px rgba(204, 5, 5, 0.432));
 }
-
+.med-main{
+  filter: drop-shadow(0px 0px  80px rgba(47, 207, 247, 0.432));
+}
 .ichiraku-detailes{
 
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -837,3 +839,37 @@ footer {
 .bootcamp-project{
   opacity: 0.6;
 }
+
+@media (max-width: 768px) {
+  .ichiraku-detailes {
+    padding-top: 20px;
+  }
+  
+  .ichiraku-detailes h1,
+  .ichiraku-detailes h4 {
+    text-align: center;
+  }
+  
+  .ichiraku-detailes ul {
+    padding-left: 20px;
+  }
+  
+  .ichiraku-detailes .col {
+    padding-top: 20px;
+  }
+  
+  .ichiraku-detailes .col h1 {
+    margin-bottom: 10px;
+  }
+  
+  .ichiraku-detailes .col img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+}
+.contri-img{
+  height: 60%vh;
+  width: 80%vw;
+}
+
