@@ -123,6 +123,20 @@
   .github-chart {
     max-width: 80%;
   }
+
+  .my-image {
+    flex-basis: 20%;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  .my-text-desk{
+    font-size: 10px;
+    
+  
+  }
+
+
 }
 
 @media (max-width: 480px) {
@@ -130,6 +144,46 @@
     max-width: 100%;
   }
 }
+
+.myself-container{
+  background-color: white;
+  padding: 20px;
+}
+
+@media (max-width: 480px) {
+  .github-chart {
+    max-width: 100%;
+  }
+
+
+}
+.myself-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.team-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.my-image {
+  width: 200px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.my-description {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .my-image {
+    width: 150px;
+  }
+}
+
 
 .repo-card:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.37);
@@ -485,6 +539,10 @@ footer {
   }
 }
 
+.pinned-repos{
+  flex-wrap: wrap;
+}
+
 #mycard-container {
   display: flex;
   flex-wrap: wrap;
@@ -500,6 +558,10 @@ footer {
   .card {
     
     flex-basis: 60%;
+  }
+
+  .repo-lang{
+    display: none;
   }
 }
 
@@ -651,13 +713,6 @@ footer {
   color: rgba(255, 255, 255, 0.685);
 }
 
-.myself{
-  background-color: white;
-  margin-bottom: 50px;
-  color: black;
-  padding: 25px;
-
-}
 
 
 .image-wrapper {

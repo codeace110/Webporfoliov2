@@ -20,8 +20,7 @@ fetch(`https://api.github.com/users/${username}/repos?sort=updated&direction=des
         
             <h3>${repo.name}</h3>
             <p><strong>Forks:</strong> ${repo.forks}</p>
-            <p><strong>Language:</strong> ${repo.language || 'Not specified'}</p>
-            <p><a href="${repo.homepage}" target="_blank">Visit</a></p>
+            <p class="repo-lang"><strong>Language:</strong> ${repo.language || 'Not specified'}</p>
             <p><a href="${repo.html_url}" target="_blank">Repository</a></p>
             
           `;
