@@ -396,7 +396,7 @@ footer {
 }
 
 .category-button {
-  margin-right: 10px;
+  margin-right: 20px;
   margin-bottom: 20px;
   margin-top: 12px;
   border-radius: 12px;
@@ -432,6 +432,8 @@ footer {
 
 
 #navigation-container {
+  display: flex;
+  justify-content: center;
   background-color: #c6e1ffaf;
   border-radius: 30px;
   padding: 10px;
