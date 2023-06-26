@@ -20,7 +20,7 @@ function createCard(title, status, leftImage, centerImage, rightImage) {
   const cardContainer = document.getElementById("mycard-container");
 
   const card = document.createElement("div");
-  card.classList.add("card", "col-lg-4", "col-md-6", "mb-4");
+  card.classList.add("card", "col-lg-4", "col-md-6", "mb-4", "websites-card");
 
   const imgWrapper = document.createElement("div");
   imgWrapper.classList.add("card-img-wrapper");
@@ -53,7 +53,7 @@ function createCard(title, status, leftImage, centerImage, rightImage) {
   cardBody.appendChild(cardTitle);
 
   const cardStatus = document.createElement("p");
-  cardStatus.classList.add("card-text");
+  cardStatus.classList.add("card-text", "card-status");
   cardStatus.textContent = status;
   cardBody.appendChild(cardStatus);
 
